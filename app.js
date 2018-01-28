@@ -212,6 +212,7 @@ app.route('/api/invoices')
         })
     })
     .post(function(req, res) {
+        console.log(req.body);
         var invoice = Invoice.build(_.pick(req.body, ['customer_id', 'discount', 'total']));
         invoice.save().then(function(invoice){
             res.json(invoice);
@@ -239,7 +240,6 @@ app.route('/api/invoices/:invoice_id')
         });
     });
 
-
 // INVOICE ITEMS API
 
 app.route('/api/invoices/:invoice_id/items')
@@ -263,7 +263,6 @@ app.route('/api/invoices/:invoice_id/items/:id')
         });
     })
     .put(function(req, res) {
-
         InvoiceItem.findById(req.params.id).then(function(invoice_item) {
       invoice_item.update(_.pick(req.body, ['product_id', 'quantity'])).then(function(invoice_item) {
         res.json(invoice_item);
