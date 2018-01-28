@@ -8,7 +8,6 @@ import {
 } from '../api';
 import InvoiceForm from "./InvoiceForm";
 
-
 class Invoices extends Component {
     constructor() {
         super();
@@ -24,6 +23,8 @@ class Invoices extends Component {
     componentWillMount() {
         this.getInvoicesList();
     }
+
+    /*get list of existing invoices*/
     getInvoicesList () {
         getInvoicesList((result) => {
             this.setState({
@@ -32,6 +33,7 @@ class Invoices extends Component {
         })
     }
 
+    /*add new invoice into list of invoices*/
     addItemIntoList(item) {
         let tempArr = [];
 
@@ -46,6 +48,7 @@ class Invoices extends Component {
         this.toggleForm(false);
     }
 
+    /*delete invoice from the system via API*/
     deleteInvoice(id) {
         if (!confirm("Do you really want to delete this invoice?")) {
             return;
@@ -73,6 +76,7 @@ class Invoices extends Component {
         })
     }
 
+    /*enable edit mode for selected invoice*/
     editInvoice(id) {
         getInvoice(id, (invoice) => {
             getInvoiceItems(id, (invoiceItems) => {
@@ -125,10 +129,12 @@ class Invoices extends Component {
         )
     }
 
+    /*show or hide invoice form*/
     toggleForm(action) {
         this.setState({showInvoiceForm: action});
     }
 
+    /*close invoice form and discard changes*/
     closeForm() {
         this.toggleForm(false);
         this.setState({

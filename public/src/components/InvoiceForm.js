@@ -52,10 +52,10 @@ class InvoiceForm extends Component {
                 total: invoiceToEdit.invoice.total,
                 invoiceItems:invoiceToEdit.invoiceItems
             });
-            // TODO: set in dropdown correct Customer
         }
     }
 
+    /*set discount for invoice*/
     setDiscount(event) {
         let discount = +event.target.value;
         if (discount<0 || discount>100)  {
@@ -72,6 +72,7 @@ class InvoiceForm extends Component {
 
     }
 
+    /*save selected product value*/
     setProduct(event) {
         let productID = +event.target.value;
         getProduct(productID, (result) => {
@@ -81,6 +82,7 @@ class InvoiceForm extends Component {
         });
     }
 
+    /*set quantity for selected product*/
     setQuantity(event) {
         let decimal=  /^[0-9]+\.[0-9]+$/;
         let quantity =  event.target.value;
@@ -103,6 +105,7 @@ class InvoiceForm extends Component {
         });
     }
 
+    /*add product(invoice item) to the list of products(invoice items of appropriate invoice)*/
     addProduct() {
         let tempArr = [];
 
@@ -142,6 +145,7 @@ class InvoiceForm extends Component {
         });
     }
 
+    /*enable edit mode for selected product(invoice item)*/
     editInvoiceItem(data) {
         let tempArr = [];
 
@@ -160,6 +164,7 @@ class InvoiceForm extends Component {
         });
     }
 
+    /*update product data*/
     updateInvoiceItem(data) {
         let invoiceItems = this.state.invoiceItems;
 
@@ -167,7 +172,7 @@ class InvoiceForm extends Component {
             if (invoiceItems[i].id === data.id) {
                 let decimal=  /^[0-9]+\.[0-9]+$/;
                 let quantity =   invoiceItems[i].quantity;
-                console.log(quantity);
+
                 if ((quantity <= 0) || (""+quantity).match(decimal)) {
                     alert("Please enter integer number > 0!");
                     this.setState({
@@ -186,6 +191,7 @@ class InvoiceForm extends Component {
         }
     }
 
+    /*delete product from the invoice*/
     deleteInvoiceItem(id) {
         if (!confirm("Do you really want to delete this product from the invoice?")) {
             return;
@@ -217,6 +223,7 @@ class InvoiceForm extends Component {
         }
     }
 
+    /*update invoice data via API*/
     updateInvoiceAPI () {
         if (!this.props.invoiceToEdit) {
             return;
@@ -229,6 +236,7 @@ class InvoiceForm extends Component {
         }, ()=>{})
     }
 
+    /*calculate invoice total value*/
     calculateTotal() {
         let products = this.state.invoiceItems;
         let total = 0;
@@ -245,6 +253,7 @@ class InvoiceForm extends Component {
         }, this.updateInvoiceAPI);
     }
 
+    /*create new invoice*/
     createInvoice(event) {
         event.preventDefault();
 
@@ -282,6 +291,7 @@ class InvoiceForm extends Component {
         })
     }
 
+    /*select customer*/
     setCustomer(event) {
         this.setState({
             customerId: +event.target.value

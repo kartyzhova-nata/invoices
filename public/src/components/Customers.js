@@ -22,6 +22,7 @@ class Customers extends Component {
         })
     }
 
+    /*update selected customer*/
     updateCustomer(data) {
         updateCustomer(data, (result) => {
             let id = result.id;
@@ -46,6 +47,7 @@ class Customers extends Component {
         })
     }
 
+    /*enable edit mode for selected customer*/
     editCustomer(data) {
         let tempArr = [];
 
@@ -63,7 +65,6 @@ class Customers extends Component {
             customersList: tempArr
         });
     }
-
 
     renderCustomersList() {
         return (

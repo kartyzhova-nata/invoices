@@ -23,6 +23,7 @@ class Products extends Component {
         })
     }
 
+    /*update selected product*/
     updateProduct(data) {
         updateProduct(data, (result) => {
             let id = result.id;
@@ -47,6 +48,7 @@ class Products extends Component {
         })
     }
 
+    /*enable edit mode for selected product*/
     editProduct(data) {
         let tempArr = [];
 
